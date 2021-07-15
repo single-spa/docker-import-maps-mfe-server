@@ -15,6 +15,7 @@ export DOCKER_ORG_NAME=mycompany
 export NPM_ORG_NAME=mycompany
 export PROJECT_NAME=navbar
 export PROJECT_UNIQUE_HASH_VERSION=$GIT_COMMIT_HASH
+export DOCKERFILE_VERSION=main
 
-docker build -f ../docker-import-maps-mfe-server/import-maps-mfe/Dockerfile . -t $DOCKER_ORG_NAME/import-maps-mfe-server --build-arg libName=@$NPM_ORG_NAME/$PROJECT_NAME --build-arg libVersion=$PROJECT_UNIQUE_HASH_VERSION --build-arg baseImage=$DOCKER_ORG_NAME/import-maps-mfe-server
+curl https://raw.githubusercontent.com/single-spa/docker-import-maps-mfe-server/$DOCKERFILE_VERSION/import-maps-mfe/Dockerfile | docker build -f - . -t $DOCKER_ORG_NAME/import-maps-mfe-server --build-arg libName=@$NPM_ORG_NAME/$PROJECT_NAME --build-arg libVersion=$PROJECT_UNIQUE_HASH_VERSION --build-arg baseImage=$DOCKER_ORG_NAME/import-maps-mfe-server
 ```
